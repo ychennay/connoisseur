@@ -4,11 +4,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+
+mongoose.connect('localhost', 'gettingstarted');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var search = require('./routes/search');
 var feedback = require('./routes/feedback');
+var restaurants = require('./routes/restaurants');
+var addUser = require('./routes/addUser');
 var addRestaurant = require('./routes/addRestaurant');
 
 var app = express();
@@ -29,6 +34,8 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/search', search);
 app.use('/feedback', feedback);
+app.use('/restaurants', restaurants);
+app.use('/addUser', addUser);
 app.use('/addRestaurant', addRestaurant);
 
 // catch 404 and forward to error handler

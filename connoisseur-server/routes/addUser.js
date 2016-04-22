@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var Restaurant = require('../models/restaurant');
+var User = require('../models/user');
 
 router.post('/', function(req, res, next) {
 
-    new Restaurant({
+    new User({
         name: req.body.name,
         username: req.body.username,
         location: req.body.location,
