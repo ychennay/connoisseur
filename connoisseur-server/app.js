@@ -11,10 +11,11 @@ mongoose.connect('localhost', 'gettingstarted');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var search = require('./routes/search');
-var feedback = require('./routes/feedback');
+var ratings = require('./routes/ratings');
 var restaurants = require('./routes/restaurants');
 var addUser = require('./routes/addUser');
 var addRestaurant = require('./routes/addRestaurant');
+var addRating = require('./routes/addRating');
 
 var app = express();
 
@@ -33,10 +34,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/search', search);
-app.use('/feedback', feedback);
+app.use('/ratings', ratings);
 app.use('/restaurants', restaurants);
 app.use('/addUser', addUser);
 app.use('/addRestaurant', addRestaurant);
+app.use('/addRating', addRating);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
