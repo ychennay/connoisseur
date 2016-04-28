@@ -31,11 +31,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// GET routes
 app.use('/', routes);
 app.use('/users', users);
 app.use('/search', search);
 app.use('/ratings', ratings);
 app.use('/restaurants', restaurants);
+
+// POST routes
 app.use('/addUser', addUser);
 app.use('/addRestaurant', addRestaurant);
 app.use('/addRating', addRating);
