@@ -14,7 +14,7 @@ Route Descriptions:
 How to run:
 
 
-$ npm install --save
+$ npm install
 
 $ mongod --dbpath /data
 
