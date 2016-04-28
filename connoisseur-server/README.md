@@ -13,8 +13,8 @@
 
 =======
 ```
-
 From connoisseur-server/ directory
+
 $ npm install
 $ mkdir data
 $ mongod --dbpath /data
