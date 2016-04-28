@@ -7,6 +7,8 @@ router.post('/', function(req, res, next) {
     new Restaurant({
         name: req.body.name,
         username: req.body.username,
+        tags: req.body.tags,
+        food_types: req.body.food_types,
         location: req.body.location,
         created_at: Date.now(),
         updated_at: Date.now()
