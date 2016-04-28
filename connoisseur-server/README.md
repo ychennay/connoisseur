@@ -13,7 +13,10 @@
 
 =======
 ```
+
+From connoisseur-server/ directory
 $ npm install
+$ mkdir data
 $ mongod --dbpath /data
 $ npm start
 $ chrome localhost:3000/<routename>
