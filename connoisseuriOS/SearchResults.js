@@ -78,6 +78,7 @@ class SearchResults extends Component {
                     underlayColor='#dddddd'>
                 <View>
                     <View style={styles.rowContainer}>
+                        <Image source={require('./Resources/restaurant.png')} style={styles.thumb}/>
                         <View  style={styles.textContainer}>
                             <Text style={styles.price}>{price}</Text>
                             <Text style={styles.title}

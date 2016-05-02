@@ -51,7 +51,13 @@ class PropertyView extends Component {
 
     render () {
         var property = this.props.property;
+        var tags = property.tags;
         var stats = 0;//property.bedroom_number + ' bed ' + property.property_type;
+        var isUpscale = "false";
+
+        if (tags[0] !== undefined) {
+            isUpscale = tags[0].upscale === true ? "true" : "false";
+        }
 
         if (property.bathroom_number) {
             stats += 1;//', ' + property.bathroom_number + ' ' + (property.bathroom_number > 1 ? 'bathrooms' : 'bathroom');
@@ -61,13 +67,15 @@ class PropertyView extends Component {
 
         return (
             <View style={styles.container}>
+                <Image source={require('./Resources/restaurant.png')} style={styles.image}/>
                 <View style={styles.heading}>
                     <Text style={styles.price}>{price}</Text>
                     <Text style={styles.title}>{property.username}</Text>
                     <View style={styles.separator}/>
                 </View>
                 <Text style={styles.description}>{stats}</Text>
-                <Text style={styles.description}>{property.created_at}</Text>
+                <Text style={styles.description}>Created at: {property.created_at}</Text>
+                <Text style={styles.description}>Upscale: {isUpscale}</Text>
             </View>
         );
     }
