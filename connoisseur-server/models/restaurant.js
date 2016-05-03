@@ -128,6 +128,7 @@ var restaurantSchema = new Schema({
         happy_hour: {type: Boolean, default: false}
     }],
     location: String,
+    notes: String,
     created_at: Date,
     updated_at: Date
 });

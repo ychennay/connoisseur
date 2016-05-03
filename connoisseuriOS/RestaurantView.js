@@ -53,11 +53,18 @@ class PropertyView extends Component {
         var property = this.props.property;
         var tags = property.tags;
         var stats = 0;//property.bedroom_number + ' bed ' + property.property_type;
-        var isUpscale = "false";
+        var isUpscale = "No";
+        var location = "No location is available for this restaurant";
+
+        if (property.location !== undefined) {
+            location = property.location;
+        }
 
         if (tags[0] !== undefined) {
-            isUpscale = tags[0].upscale === true ? "true" : "false";
+            isUpscale = tags[0].upscale === true ? "Yes" : "No";
         }
+
+
 
         if (property.bathroom_number) {
             stats += 1;//', ' + property.bathroom_number + ' ' + (property.bathroom_number > 1 ? 'bathrooms' : 'bathroom');
@@ -76,6 +83,7 @@ class PropertyView extends Component {
                 <Text style={styles.description}>{stats}</Text>
                 <Text style={styles.description}>Created at: {property.created_at}</Text>
                 <Text style={styles.description}>Upscale: {isUpscale}</Text>
+                <Text style={styles.description}>Location: {location}</Text>
             </View>
         );
     }
