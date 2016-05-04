@@ -4,9 +4,10 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Restaurant = require('../models/restaurant');
 
-function tagsMatch(queriedTagsObject, candidateTagsObject) {
-	for (tagToMatch in queriedTagsObject) {
-		if (queriedTagsObject[tagToMatch] != candidateTagsObject[tagToMatch]) {
+/* Returns true if all entries in map1 are also found in map2. */
+function isSubMap(map1, map2) {
+	for (key in map1) {
+		if (map1[key] != map2[key]) {
 			return false;
 		}
 	}
@@ -18,18 +19,28 @@ router.get('/', function(req, res, next) {
 
 	var queriedName = req.query.name ? req.query.name : '';
 	var queriedUsername = req.query.username ? req.query.username : '';
-	var queriedTags = req.query.tags ? req.query.tags : '{}';
+	var queriedTags = req.query.tags ? JSON.parse(req.query.tags) : {};
+	var queriedFoodTypes = req.query.food_types ? JSON.parse(req.query.food_types) : {};
+	var queriedMeals = req.query.meals ? JSON.parse(req.query.meals) : {};
 
 	Restaurant.find({
+		// Retrieve the list of all restaurants matching the queried name and
+		// username.
 		name : new RegExp('^.*' + queriedName + '.*$', "i"),
 		username : new RegExp('^.*' + queriedUsername + '.*$', "i"),
 	}, function (err, restaurants) {
-		var queriedTagsObject = JSON.parse(queriedTags);
-		var tagsMatchedRestaurants = restaurants.filter(function(restaurant) {
-			var restaurantTagsObject = restaurant['tags'];
-			return tagsMatch(queriedTagsObject, restaurantTagsObject);
+		// Filter the restaurants to only those matching the queried tags, food
+		// types, and meals.
+		restaurants = restaurants.filter(function(restaurant) {
+			var restaurantTags = restaurant['tags'];
+			var restaurantFoodTypes = restaurant['food_types'];
+			var restaurantMeals = restaurant['meals'];
+			return (isSubMap(queriedTags, restaurantTags)
+				||	isSubMap(queriedFoodTypes, restaurantFoodTypes)
+				||	isSubMap(queriedMeals, restaurantMeals));
 		});
-		res.send(tagsMatchedRestaurants);
+		// Send final list of restaurants to client.
+		res.send(restaurants);
 	})
 	.limit(5)
 	.sort('+name');
