@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mongoimport --db gettingstarted --collection restaurants --type csv --headerline --file "Restaurant Tags - Santa Monica.csv"
