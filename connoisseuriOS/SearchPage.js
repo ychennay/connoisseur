@@ -17,10 +17,11 @@ var {
 
 var styles = StyleSheet.create({
   description: {
+    fontFamily: 'Cochin',
     marginBottom: 20,
     fontSize: 18,
     textAlign: 'center',
-    color: '#656565'
+    color: '#275B8A'
   },
   container: {
     padding: 30,
@@ -41,8 +42,8 @@ var styles = StyleSheet.create({
     height: 36,
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
+    backgroundColor: '#275B8A',
+    borderColor: '#275B8A',
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 10,
@@ -56,9 +57,9 @@ var styles = StyleSheet.create({
     flex: 4,
     fontSize: 18,
     borderWidth: 1,
-    borderColor: '#48BBEC',
+    borderColor: '#275B8A',
     borderRadius: 8,
-    color: '#48BBEC'
+    color: '#275B8A'
   },
   image: {
     width: 217,
@@ -91,7 +92,7 @@ class SearchPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchString: 'Search for a restaurant',
+      searchString: '',
       isLoading: false,
       message: ''
     };
@@ -161,6 +162,7 @@ class SearchPage extends Component {
 
     return (
       <View style={styles.container}>
+        <Image source={require('./Resources/restaurant_1.jpg')} style={styles.image}/>
         <Text style={styles.description}>
           Search for the best dining locations in Santa Monica!
         </Text>
@@ -179,11 +181,6 @@ class SearchPage extends Component {
             <Text style={styles.buttonText}>Go</Text>
           </TouchableHighlight>
         </View>
-        <TouchableHighlight style={styles.button}
-          underlayColor='#99d9f4'>
-          <Text style={styles.buttonText}>Location</Text>
-        </TouchableHighlight>
-        <Image source={require('./Resources/restaurant.png')} style={styles.image}/>
         {spinner}
         <Text style={styles.description}>{this.state.message}</Text>
       </View>
