@@ -82,7 +82,7 @@ function urlForQueryAndPage(key, value, pageNumber) {
   .map(key => key + '=' + encodeURIComponent(data[key]))
   .join('&');
 
-  var q = 'username' + '=' + value;
+  var q = 'name' + '=' + value;
 
   return 'http://localhost:3000/search?' + q;// + querystring;
 }
