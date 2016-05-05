@@ -8,7 +8,7 @@ listToBoolMap () {
 		item=$(echo "$item" | tr '[:upper:]' '[:lower:]')
 		map=$map'"'"$item"'":true,'
 	done
-	map='{'${map%?}'}'
+	map='[{'${map%?}'}]'
 	echo $map
 }
 

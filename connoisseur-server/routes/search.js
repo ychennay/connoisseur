@@ -32,9 +32,9 @@ router.get('/', function(req, res, next) {
 		// Filter the restaurants to only those matching the queried tags, food
 		// types, and meals.
 		restaurants = restaurants.filter(function(restaurant) {
-			var restaurantTags = restaurant['tags'];
-			var restaurantFoodTypes = restaurant['food_types'];
-			var restaurantMeals = restaurant['meals'];
+			var restaurantTags = restaurant['tags'][0];
+			var restaurantFoodTypes = restaurant['food_types'][0];
+			var restaurantMeals = restaurant['meals'][0];
 			return (isSubMap(queriedTags, restaurantTags)
 				&&	isSubMap(queriedFoodTypes, restaurantFoodTypes)
 				&&	isSubMap(queriedMeals, restaurantMeals));

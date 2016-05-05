@@ -11,7 +11,7 @@ var restaurantSchema = new Schema({
     name: String,
     username: { type: String, required: true, unique: true },
     location: String,
-    tags: {
+    tags: [{
         afternoon: {type: Boolean, default: false},
         authentic: {type: Boolean, default: false},
         authentic_takeout: {type: Boolean, default: false},
@@ -94,9 +94,9 @@ var restaurantSchema = new Schema({
         vegetarian_options: {type: Boolean, default: false},
         wine_bar: {type: Boolean, default: false},
         worth_the_lines: {type: Boolean, default: false}
-    },
+    }],
     price: String,
-    meals: {
+    meals: [{
         breakfast: {type: Boolean, default: false},
         brunch: {type: Boolean, default: false},
         coffee: {type: Boolean, default: false},
@@ -104,12 +104,12 @@ var restaurantSchema = new Schema({
         drinks: {type: Boolean, default: false},
         happy_hour: {type: Boolean, default: false},
         lunch: {type: Boolean, default: false}
-    },
+    }],
     menu: String,
     address: String,
     phone_number: String,
     reviews: String,
-    food_types: {
+    food_types: [{
         all_american: {type: Boolean, default: false},
         asian: {type: Boolean, default: false},
         bakery: {type: Boolean, default: false},
@@ -135,7 +135,7 @@ var restaurantSchema = new Schema({
         tapas: {type: Boolean, default: false},
         thai: {type: Boolean, default: false},
         vegan: {type: Boolean, default: false}
-    },
+    }],
     notes: String,
     website: String,
     created_at: Date,
