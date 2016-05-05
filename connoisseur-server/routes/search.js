@@ -27,7 +27,7 @@ router.get('/', function(req, res, next) {
 		// Retrieve the list of all restaurants matching the queried name and
 		// username.
 		name : new RegExp('^.*' + queriedName + '.*$', "i"),
-		username : new RegExp('^.*' + queriedUsername + '.*$', "i"),
+		username : new RegExp('^.*' + queriedUsername + '.*$', "i")
 	}, function (err, restaurants) {
 		// Filter the restaurants to only those matching the queried tags, food
 		// types, and meals.
@@ -42,7 +42,7 @@ router.get('/', function(req, res, next) {
 		// Send final list of restaurants to client.
 		res.send(restaurants);
 	})
-	.limit(5)
+	//.limit(5)
 	.sort('+name');
 });
 

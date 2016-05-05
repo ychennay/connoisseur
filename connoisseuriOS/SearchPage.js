@@ -82,7 +82,9 @@ function urlForQueryAndPage(key, value, pageNumber) {
   .map(key => key + '=' + encodeURIComponent(data[key]))
   .join('&');
 
-  return 'http://localhost:3000/search';// + querystring;
+  var q = 'username' + '=' + value;
+
+  return 'http://localhost:3000/search?' + q;// + querystring;
 }
 
 class SearchPage extends Component {
@@ -181,7 +183,7 @@ class SearchPage extends Component {
           underlayColor='#99d9f4'>
           <Text style={styles.buttonText}>Location</Text>
         </TouchableHighlight>
-        <Image source={require('./Resources/house.png')} style={styles.image}/>
+        <Image source={require('./Resources/restaurant.png')} style={styles.image}/>
         {spinner}
         <Text style={styles.description}>{this.state.message}</Text>
       </View>
