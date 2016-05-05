@@ -10,16 +10,20 @@ var Schema = mongoose.Schema;
 var restaurantSchema = new Schema({
     name: String,
     username: { type: String, required: true, unique: true },
+    location: String,
     tags: {
         afternoon: {type: Boolean, default: false},
         authentic: {type: Boolean, default: false},
         authentic_takeout: {type: Boolean, default: false},
         baked_goods: {type: Boolean, default: false},
+        bar: {type: Boolean, default: false},
         bar_area: {type: Boolean, default: false},
         bar_scene: {type: Boolean, default: false},
         bar_seating: {type: Boolean, default: false},
         beer_and_wine: {type: Boolean, default: false},
         beer_selection: {type: Boolean, default: false},
+        burgers: {type: Boolean, default: false},
+        cafe: {type: Boolean, default: false},
         casual: {type: Boolean, default: false},
         celeb_spotting: {type: Boolean, default: false},
         chef_inventive: {type: Boolean, default: false},
@@ -91,6 +95,20 @@ var restaurantSchema = new Schema({
         wine_bar: {type: Boolean, default: false},
         worth_the_lines: {type: Boolean, default: false}
     },
+    price: String,
+    meals: {
+        breakfast: {type: Boolean, default: false},
+        brunch: {type: Boolean, default: false},
+        coffee: {type: Boolean, default: false},
+        dinner: {type: Boolean, default: false},
+        drinks: {type: Boolean, default: false},
+        happy_hour: {type: Boolean, default: false},
+        lunch: {type: Boolean, default: false}
+    },
+    menu: String,
+    address: String,
+    phone_number: String,
+    reviews: String,
     food_types: {
         all_american: {type: Boolean, default: false},
         asian: {type: Boolean, default: false},
@@ -118,17 +136,8 @@ var restaurantSchema = new Schema({
         thai: {type: Boolean, default: false},
         vegan: {type: Boolean, default: false}
     },
-    meals: {
-        breakfast: {type: Boolean, default: false},
-        brunch: {type: Boolean, default: false},
-        coffee: {type: Boolean, default: false},
-        dinner: {type: Boolean, default: false},
-        drinks: {type: Boolean, default: false},
-        happy_hour: {type: Boolean, default: false},
-        lunch: {type: Boolean, default: false}
-    },
-    location: String,
     notes: String,
+    website: String,
     created_at: Date,
     updated_at: Date
 });
