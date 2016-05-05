@@ -82,7 +82,9 @@ function urlForQueryAndPage(key, value, pageNumber) {
   .map(key => key + '=' + encodeURIComponent(data[key]))
   .join('&');
 
-  return 'http://localhost:3000/search';// + querystring;
+  var q = 'username' + '=' + value;
+
+  return 'http://localhost:3000/search?' + q;// + querystring;
 }
 
 class SearchPage extends Component {
