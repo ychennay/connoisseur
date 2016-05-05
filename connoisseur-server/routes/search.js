@@ -36,8 +36,8 @@ router.get('/', function(req, res, next) {
 			var restaurantFoodTypes = restaurant['food_types'];
 			var restaurantMeals = restaurant['meals'];
 			return (isSubMap(queriedTags, restaurantTags)
-				||	isSubMap(queriedFoodTypes, restaurantFoodTypes)
-				||	isSubMap(queriedMeals, restaurantMeals));
+				&&	isSubMap(queriedFoodTypes, restaurantFoodTypes)
+				&&	isSubMap(queriedMeals, restaurantMeals));
 		});
 		// Send final list of restaurants to client.
 		res.send(restaurants);

@@ -5,6 +5,7 @@ listToBoolMap () {
 	map=''
 	for item in $1
 	do
+		item=$(echo "$item" | tr '[:upper:]' '[:lower:]')
 		map=$map'"'"$item"'":true,'
 	done
 	map='{'${map%?}'}'
@@ -31,6 +32,7 @@ then
 		notesField='"notes":"'"$notes"'"'
 		websiteField='"website":"'"$website"'"'
 		jsonRequestBody='{'"$nameField"','"$usernameField"','"$locationField"','"$tagsField"','"$priceField"','"$mealsField"','"$menuField"','"$addressField"','"$phoneNumberField"','"$reviewsField"','"$foodTypesField"','"$notesField"','"$websiteField"'}'
+		echo $jsonRequestBody
 		curl -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -d "$jsonRequestBody" "http://localhost:3000/addRestaurant"
 		idx=$((idx+1))
 	done <$1
