@@ -10,7 +10,7 @@ $ sudo npm install
 
 ## Running
 ```
-Make sure your MongoDB server is runnin
+Make sure your MongoDB server is running
 $ open -a Xcode connoisseuriOS.xcodeproj/
 Proceed to build and run here
 ```
