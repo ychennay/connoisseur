@@ -77,7 +77,7 @@ class PropertyView extends Component {
                 <Image source={require('./Resources/restaurant.png')} style={styles.image}/>
                 <View style={styles.heading}>
                     <Text style={styles.price}>{price}</Text>
-                    <Text style={styles.title}>{property.username}</Text>
+                    <Text style={styles.title}>{property.name}</Text>
                     <View style={styles.separator}/>
                 </View>
                 <Text style={styles.description}>{stats}</Text>

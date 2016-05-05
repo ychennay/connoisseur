@@ -82,7 +82,7 @@ class SearchResults extends Component {
                         <View  style={styles.textContainer}>
                             <Text style={styles.price}>{price}</Text>
                             <Text style={styles.title}
-                                  numberOfLines={1}>{rowData.username}</Text>
+                                  numberOfLines={1}>{rowData.name}</Text>
                         </View>
                     </View>
                     <View style={styles.separator}/>
