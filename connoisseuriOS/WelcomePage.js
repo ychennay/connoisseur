@@ -17,60 +17,87 @@ var {
 
 var styles = StyleSheet.create({
   container: {
-    padding: 30,
-    marginTop: 65,
-    alignItems: 'center'
+    padding: 20,
+    alignItems: 'center',
+    backgroundColor: '#7BC8D7',
+    paddingBottom: 50
+  },
+  brand: {
+    fontFamily: 'Bradley Hand',
+    marginTop: 20,
+    fontSize: 45,
+    fontWeight: '300',
+    textAlign: 'center',
+    color: 'white'
   },
   description: {
     fontFamily: 'Hiragino Sans',
-    marginBottom: 20,
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontWeight: '200',
     textAlign: 'center',
-    color: '#F26C68'
+    color: 'white',
+    marginBottom: 50
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 16,
     color: 'white',
     alignSelf: 'center',
-    fontFamily: 'Helvetica Neue'
+    fontFamily: 'Hiragino Sans'
   },
   button: {
-    height: 36,
+    height: 40,
+    width: 200,
+    padding: 23,
+    paddingTop: 28,
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#275B8A',
-    borderColor: '#275B8A',
-    borderWidth: 1,
-    borderRadius: 8,
+    backgroundColor: '#F26D6A',
     marginBottom: 10,
-    alignSelf: 'stretch',
     justifyContent: 'center'
   }
 });
 
 class WelcomePage extends Component {
-  onSearchPressed() {
+  /////////////////////////////////////////////////////////////
+  // TO-DO: when Login and SignUp are configured            ///
+  // Need to reconsider doing other methods instead of push ///
+  /////////////////////////////////////////////////////////////
 
+  _onLoginPressed() {
+    this.props.navigator.push({
+      title: 'Search',
+      component: SearchPage
+    });
+  }
+
+  _onSignUpPressed() {
+    this.props.navigator.push({
+      title: 'Search',
+      component: SearchPage
+    });
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Image source={require('./Resources/sweet-icon.png')} style={styles.image}/>
-        <Text style={styles.description}>
-          Welcome to Connoisseur
+        <Image source={require('./Resources/search-page-icon.png')} style={styles.image}/>
+        <Text style={styles.brand}>
+          Connoisseur
         </Text>
         <Text style={styles.description}>
-          Where We Match Your Taste
-        </Text>
-        <Text style={styles.description}>
-          Cheers!
+          where we match your taste
         </Text>
         <TouchableHighlight style={styles.button}
-            //onPress={this.onSearchPressed.bind(this)}
-            underlayColor='#99d9f4'>
-          <Text style={styles.buttonText}>Let's Get Started</Text>
+            // as for now both buttons go to search page
+            onPress={this._onLoginPressed.bind(this)}
+            underlayColor='#D58385'>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={styles.button}
+            // as for now both buttons go to search page
+            onPress={this._onSignUpPressed.bind(this)}
+            underlayColor='#D58385'>
+          <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableHighlight>
       </View>
     )

@@ -10,15 +10,8 @@ var React = require('react-native');
 var WelcomePage = require('./WelcomePage');
 
 var styles = React.StyleSheet.create({
-  text: {
-    color: 'black',
-    backgroundColor: 'white',
-    fontSize: 30,
-    margin: 80,
-    fontFamily: 'Arial'
-  },
   container: {
-    flex: 1
+    flex: 1,
   }
 });
 
@@ -28,8 +21,9 @@ class PropertyFinderApp extends React.Component {
       <React.NavigatorIOS
         style={styles.container}
         initialRoute={{
-          title: 'Connoisseur',
+          title: 'Login or Sign Up',
           component: WelcomePage,
+          navigationBarHidden: true
         }}/>
     );
   }
