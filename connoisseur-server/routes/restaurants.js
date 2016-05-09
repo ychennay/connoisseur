@@ -16,7 +16,7 @@ var Restaurant = require('../models/restaurant');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   Restaurant.find({}, function (err, restaurants) {
-      console.log(restaurants);
+    console.log(restaurants);
     res.send(restaurants);
   });
 });
