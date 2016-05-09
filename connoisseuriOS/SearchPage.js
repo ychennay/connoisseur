@@ -36,7 +36,8 @@ var styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     color: 'white',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    fontFamily: 'Cochin'
   },
   button: {
     height: 36,
@@ -52,14 +53,15 @@ var styles = StyleSheet.create({
   },
   searchInput: {
     height: 36,
-    padding: 4,
+    padding: 15,
     marginRight: 5,
     flex: 4,
     fontSize: 18,
     borderWidth: 1,
     borderColor: '#275B8A',
     borderRadius: 8,
-    color: '#275B8A'
+    color: '#275B8A',
+    fontFamily: 'Cochin'
   },
   image: {
     width: 217,
@@ -134,8 +136,6 @@ class SearchPage extends Component {
       isLoading: false,
       message: ''
     });
-
-
 
     if (response.length > 0) {
       this.props.navigator.push({
