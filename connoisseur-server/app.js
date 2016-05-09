@@ -4,11 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
 
+var mongoose = require('mongoose');
 mongoose.connect('localhost', 'gettingstarted');
 
-var routes = require('./routes/index');
+var app = express();
+
 var users = require('./routes/users');
 var search = require('./routes/search');
 var ratings = require('./routes/ratings');
@@ -16,8 +17,6 @@ var restaurants = require('./routes/restaurants');
 var addUser = require('./routes/addUser');
 var addRestaurant = require('./routes/addRestaurant');
 var addRating = require('./routes/addRating');
-
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,6 +29,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Initialize Passport
+var passport = require('passport');
+var expressSession = require('express-session');
+app.use(expressSession({secret: 'mySecretKey'}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+var initPassport = require('./passport/init');
+initPassport(passport);
+var routes = require('./routes/index')(passport);
+
+// Using the flash middleware provided by connect-flash to store messages in session
+// and displaying in templates
+var flash = require('connect-flash');
+app.use(flash());
 
 
 // GET routes
