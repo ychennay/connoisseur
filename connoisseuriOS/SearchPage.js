@@ -1,9 +1,10 @@
-'use strict';
+import React from 'react';
+import * as Animatable from 'react-native-animatable';
+import Collapsible from 'react-native-collapsible';
+import Accordion from 'react-native-collapsible/Accordion';
+import SearchResults from './SearchResults';
 
-var React = require('react-native');
-var SearchResults = require('./SearchResults');
-
-var {
+import {
   StyleSheet,
   Text,
   TextInput,
@@ -13,7 +14,7 @@ var {
   Image,
   Component,
   AlertIOS
-} = React;
+} from 'react-native';
 
 var styles = StyleSheet.create({
   description: {
@@ -53,7 +54,7 @@ var styles = StyleSheet.create({
   },
   searchInput: {
     height: 36,
-    padding: 15,
+    padding: 5,
     marginRight: 5,
     flex: 4,
     fontSize: 18,

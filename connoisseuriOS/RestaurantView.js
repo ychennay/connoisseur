@@ -1,18 +1,12 @@
-/**
- * Created by tygiacalone on 5/1/16.
- */
+import React from 'react';
 
-'use strict';
-
-var React = require('react-native');
-
-var {
-    StyleSheet,
-    Image,
-    View,
-    Text,
-    Component
-    } = React;
+import {
+  StyleSheet,
+  Image,
+  View,
+  Text,
+  Component
+} from 'react-native';
 
 var styles = StyleSheet.create({
     container: {

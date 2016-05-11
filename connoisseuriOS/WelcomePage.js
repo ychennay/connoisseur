@@ -1,31 +1,29 @@
-'use strict';
+import React from 'react';
 
-var React = require('react-native');
-var SearchPage = require('./SearchPage');
+import SearchPage from './SearchPage';
 
-var {
+import {
   StyleSheet,
   Text,
   TextInput,
   View,
-  TouchableHighlight,
-  ActivityIndicatorIOS,
   Image,
-  Component,
-  AlertIOS
-} = React;
+  TouchableHighlight,
+  Component
+} from 'react-native';
+
 
 var styles = StyleSheet.create({
   container: {
     padding: 20,
     alignItems: 'center',
     backgroundColor: '#7BC8D7',
-    paddingBottom: 50
+    paddingBottom: 150
   },
   brand: {
     fontFamily: 'Bradley Hand',
     marginTop: 20,
-    fontSize: 45,
+    fontSize: 50,
     fontWeight: '300',
     textAlign: 'center',
     color: 'white'

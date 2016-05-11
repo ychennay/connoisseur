@@ -1,21 +1,16 @@
-/**
- * Created by tygiacalone on 5/1/16.
- */
+import React from 'react';
 
-'use strict';
+import PropertyView from './RestaurantView';
 
-var React = require('react-native');
-var PropertyView = require('./RestaurantView');
-
-var {
-    StyleSheet,
-    Image,
-    View,
-    TouchableHighlight,
-    ListView,
-    Text,
-    Component
-} = React;
+import {
+  StyleSheet,
+  Image,
+  View,
+  TouchableHighlight,
+  ListView,
+  Text,
+  Component
+} from 'react-native';
 
 var styles = {
     thumb: {
