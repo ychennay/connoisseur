@@ -13,7 +13,8 @@ router.post('/', function(req, res, next) {
         updated_at: Date.now()
     }).save( function(err) {
             if (err) {
-                res.sendStatus(400);
+                //res.sendStatus(400);
+                res.send(err.message);
                 console.log(err);
             }
             else {
