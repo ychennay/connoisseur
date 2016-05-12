@@ -18,6 +18,7 @@ var restaurants = require('./routes/restaurants');
 var addUser = require('./routes/addUser');
 var addRestaurant = require('./routes/addRestaurant');
 var addRating = require('./routes/addRating');
+var auth = require('./routes/auth');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,6 +42,7 @@ app.use(passport.session());
 var passportSerialization = require('./passport/serialization');
 var passportSignup = require('./passport/signup');
 var passportLogin = require('./passport/login');
+var passportJwt = require('./passport/jwt');
 
 // Using the flash middleware provided by connect-flash to store messages in session
 // and displaying in templates
@@ -56,6 +58,7 @@ app.use('/ratings', ratings);
 app.use('/restaurants', restaurants);
 
 // POST routes
+app.use('/auth', auth);
 app.use('/addUser', addUser);
 app.use('/addRestaurant', addRestaurant);
 app.use('/addRating', addRating);

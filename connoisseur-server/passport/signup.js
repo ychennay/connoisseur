@@ -17,7 +17,7 @@ passport.use('signup', new LocalStrategy({
         },
         function(req, username, password, done) {
 
-            var findOrCreateUser = function(){
+            function findOrCreateUser(){
                 // find a user in Mongo with provided username
                 User.findOne({ 'username' :  username }, function(err, user) {
                     // In case of any error, return using the done method

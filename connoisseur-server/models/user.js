@@ -5,6 +5,7 @@
 // grab the things we need
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var bCrypt = require('bcrypt-nodejs');
 
 // create a schema
 var userSchema = new Schema({
@@ -18,6 +19,17 @@ var userSchema = new Schema({
     created_at: Date,
     updated_at: Date
 });
+
+userSchema.methods.comparePassword = function(password, callback) {
+    console.log(password);
+    console.log(this.password);
+    return bCrypt.compare(password, this.password, function(err, isMatch) {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, isMatch);
+    });
+};
 
 // the schema is useless so far
 // we need to create a model using it
