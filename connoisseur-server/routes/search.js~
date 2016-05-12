@@ -42,14 +42,14 @@ router.get('/', passport.authenticate('jwt', {session:false}), function(req, res
 				&&	isSubMap(queriedMeals, restaurantMeals));
 		});
 		// Send final list of restaurants to client.
-		//res.send(restaurants);
-        
+		res.send(restaurants);
+        /*
         res.send(
         'It worked! User id is: ' + req.user._id + '.'
             + '\n' + req.user.username
                 + '\n' + 'email: ' + req.user.email
                     + '\n' + 'name: ' + req.user.firstName + ' ' + req.user.lastName    
-        );
+        );*/
 	})
 	//.limit(5)
 	.sort('+name');
