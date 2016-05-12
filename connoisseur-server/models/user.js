@@ -9,13 +9,30 @@ var bCrypt = require('bcrypt-nodejs');
 
 // create a schema
 var userSchema = new Schema({
-    id: String,
     username: { type: String, required: true, unique: true },
     password: String,
     email: String,
     firstName: String,
     lastName: String,
-    location: String,
+    location: [{ 
+        lattitude: Number,
+        longitude: Number,
+    }],
+    ratings: [{
+        restaurantId: String,
+        rating: {
+            type: String,
+            enum: ['love', 'like', 'dislike']
+        }
+    }],
+    similarities: [{
+        username: String,
+        score: Number
+    }],
+    topList: [{
+        restaurantId: String,
+        score: Number
+    }],
     created_at: Date,
     updated_at: Date
 });

@@ -5,8 +5,8 @@ var Restaurant = require('../models/restaurant');
 router.post('/', function(req, res, next) {
 
     new Restaurant({
+        restaurantId: req.body.restaurantId,
         name: req.body.name,
-        username: req.body.username,
         location: req.body.location,
         tags: req.body.tags,
         price: req.body.price,

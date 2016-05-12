@@ -19,17 +19,17 @@ function isSubMap(map1, map2) {
 /* GET users listing. */
 router.get('/', passport.authenticate('jwt', {session:false}), function(req, res, next) {
 
+	var queriedRestaurantId = req.query.restaurantId ? req.query.restaurantId : '';
 	var queriedName = req.query.name ? req.query.name : '';
-	var queriedUsername = req.query.username ? req.query.username : '';
 	var queriedTags = req.query.tags ? JSON.parse(req.query.tags) : {};
 	var queriedFoodTypes = req.query.food_types ? JSON.parse(req.query.food_types) : {};
 	var queriedMeals = req.query.meals ? JSON.parse(req.query.meals) : {};
 
 	Restaurant.find({
-		// Retrieve the list of all restaurants matching the queried name and
-		// username.
-		name : new RegExp('^.*' + queriedName + '.*$', "i"),
-		username : new RegExp('^.*' + queriedUsername + '.*$', "i")
+		// Retrieve the list of all restaurants matching the queried restaurant
+		// id and name.
+		restaurantId : new RegExp('^.*' + queriedRestaurantId + '.*$', "i"),
+		name : new RegExp('^.*' + queriedName + '.*$', "i")
 	}, function (err, restaurants) {
 		// Filter the restaurants to only those matching the queried tags, food
 		// types, and meals.
@@ -51,8 +51,7 @@ router.get('/', passport.authenticate('jwt', {session:false}), function(req, res
                     + '\n' + 'name: ' + req.user.firstName + ' ' + req.user.lastName    
         );
 	})
-	//.limit(5)
-	.sort('+name');
+	.sort('+restaurantId');
 });
 
 module.exports = router;

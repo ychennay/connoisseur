@@ -5,7 +5,7 @@ var Rating = require('../models/rating');
 router.post('/', function(req, res, next) {
 
     new Rating({
-        restaurantName: req.body.restaurantName,
+        restaurantId: req.body.restaurantId,
         username: req.body.username,
         rating: req.body.rating,
         created_at: Date.now(),

@@ -15,7 +15,6 @@ var users = require('./routes/users');
 var search = require('./routes/search');
 var ratings = require('./routes/ratings');
 var restaurants = require('./routes/restaurants');
-var addUser = require('./routes/addUser');
 var addRestaurant = require('./routes/addRestaurant');
 var addRating = require('./routes/addRating');
 var auth = require('./routes/auth');
@@ -59,7 +58,6 @@ app.use('/restaurants', restaurants);
 
 // POST routes
 app.use('/auth', auth);
-app.use('/addUser', addUser);
 app.use('/addRestaurant', addRestaurant);
 app.use('/addRating', addRating);
 
