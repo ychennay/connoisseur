@@ -38,8 +38,9 @@ app.use(expressSession({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-var initPassport = require('./passport/init');
-initPassport(passport);
+var passportSerialization = require('./passport/serialization');
+var passportSignup = require('./passport/signup');
+var passportLogin = require('./passport/login');
 
 // Using the flash middleware provided by connect-flash to store messages in session
 // and displaying in templates

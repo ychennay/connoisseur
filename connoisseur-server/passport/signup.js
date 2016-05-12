@@ -1,10 +1,18 @@
-var LocalStrategy   = require('passport-local').Strategy;
+/**
+ * Created by tygiacalone on 5/11/16.
+ */
 var User = require('../models/user');
+var LocalStrategy = require('passport-local').Strategy;
 var bCrypt = require('bcrypt-nodejs');
+var passport = require('passport');
 
-module.exports = function(passport){
 
-  passport.use('signup', new LocalStrategy({
+// Generates hash using bCrypt
+function createHash(password){
+    return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+}
+
+passport.use('signup', new LocalStrategy({
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
         function(req, username, password, done) {
@@ -36,8 +44,8 @@ module.exports = function(passport){
                         // save the user
                         newUser.save(function(err) {
                             if (err){
-                                console.log('Error in Saving user: '+err);  
-                                throw err;  
+                                console.log('Error in Saving user: '+err);
+                                throw err;
                             } else {
                                 console.log('User Registration succesful');
                                 return done(null, newUser);
@@ -50,11 +58,6 @@ module.exports = function(passport){
             // in the next tick of the event loop
             process.nextTick(findOrCreateUser);
         })
-    );
+);
 
-    // Generates hash using bCrypt
-    var createHash = function(password){
-        return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
-    }
-
-};
+module.exports = passport;
