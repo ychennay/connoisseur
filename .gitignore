@@ -1,7 +1,4 @@
 connoisseur-server/node_modules/*
-connoisseur-server/node_modules/*
 connoisseur-server/.idea/*
 connoisseur-server/data/*
-connoisseuriOS/npm-debug.log
-connoisseuriOS/.idea/*
-connoisseuriOS/npm-debug.log
+connoisseur-server/npm-debug.log
