@@ -1,4 +1,5 @@
 var express = require('express');
+var passport = require('passport');
 var router = express.Router();
 
 var isAuthenticated = function (req, res, next) {
@@ -13,48 +14,45 @@ var isAuthenticated = function (req, res, next) {
   }
 };
 
-module.exports = function(passport){
+// Default index page
+router.get('/', function(req, res) {
+  res.render('index', {title: 'Connoisseur'});
+});
 
-  // Default index page
-  router.get('/', function(req, res) {
-    res.render('index', {title: 'Connoisseur'});
-  });
+/* GET login page. */
+router.get('/signin', function(req, res) {
+    // Display the Login page with any flash message, if any
+  res.render('signin', { message: req.flash('message') });
+});
 
-  /* GET login page. */
-  router.get('/signin', function(req, res) {
-      // Display the Login page with any flash message, if any
-    res.render('signin', { message: req.flash('message') });
-  });
+/* Handle Login POST */
+router.post('/login', passport.authenticate('login', {
+  successRedirect: '/home',
+  failureRedirect: '/signin',
+  failureFlash : true
+}));
 
-  /* Handle Login POST */
-  router.post('/login', passport.authenticate('login', {
-    successRedirect: '/home',
-    failureRedirect: '/signin',
-    failureFlash : true  
-  }));
+/* GET Registration Page */
+router.get('/signup', function(req, res){
+  res.render('register',{message: req.flash('message')});
+});
 
-  /* GET Registration Page */
-  router.get('/signup', function(req, res){
-    res.render('register',{message: req.flash('message')});
-  });
+/* Handle Registration POST */
+router.post('/signup', passport.authenticate('signup', {
+  successRedirect: '/home',
+  failureRedirect: '/signup',
+  failureFlash : true
+}));
 
-  /* Handle Registration POST */
-  router.post('/signup', passport.authenticate('signup', {
-    successRedirect: '/home',
-    failureRedirect: '/signup',
-    failureFlash : true  
-  }));
+/* GET Home Page */
+router.get('/home', isAuthenticated, function(req, res){
+  res.render('home', { user: req.user });
+});
 
-  /* GET Home Page */
-  router.get('/home', isAuthenticated, function(req, res){
-    res.render('home', { user: req.user });
-  });
+/* Handle Logout */
+router.get('/signout', function(req, res) {
+  req.logout();
+  res.redirect('/signin');
+});
 
-  /* Handle Logout */
-  router.get('/signout', function(req, res) {
-    req.logout();
-    res.redirect('/signin');
-  });
-
-  return router;
-};
+module.exports = router;

@@ -10,6 +10,7 @@ mongoose.connect('localhost', 'gettingstarted');
 
 var app = express();
 
+var index = require('./routes/index');
 var users = require('./routes/users');
 var search = require('./routes/search');
 var ratings = require('./routes/ratings');
@@ -39,7 +40,6 @@ app.use(passport.session());
 
 var initPassport = require('./passport/init');
 initPassport(passport);
-var routes = require('./routes/index')(passport);
 
 // Using the flash middleware provided by connect-flash to store messages in session
 // and displaying in templates
@@ -48,7 +48,7 @@ app.use(flash());
 
 
 // GET routes
-app.use('/', routes);
+app.use('/', index);
 app.use('/users', users);
 app.use('/search', search);
 app.use('/ratings', ratings);
