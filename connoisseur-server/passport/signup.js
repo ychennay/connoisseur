@@ -36,7 +36,7 @@ passport.use('signup', new LocalStrategy({
 
                         // set the user's local credentials
                         newUser.username = username;
-                        newUser.password = createHash(password);
+                        newUser.password = password;
                         newUser.email = req.param('email');
                         newUser.firstName = req.param('firstName');
                         newUser.lastName = req.param('lastName');

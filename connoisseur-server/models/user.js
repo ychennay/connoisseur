@@ -20,6 +20,29 @@ var userSchema = new Schema({
     updated_at: Date
 });
 
+
+// Saves the user's password hashed
+userSchema.pre('save', function (next) {
+    var user = this;
+    if (this.isModified('password') || this.isNew) {
+        bCrypt.genSalt(10, function (err, salt) {
+            if (err) {
+                return next(err);
+            }
+            bCrypt.hash(user.password, salt, null, function(err, hash) {
+                if (err) {
+                    return next(err);
+                }
+                user.password = hash;
+                next();
+            });
+        });
+    } else {
+        return next();
+    }
+});
+
+
 userSchema.methods.comparePassword = function(password, callback) {
     console.log(password);
     console.log(this.password);

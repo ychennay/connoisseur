@@ -102,13 +102,10 @@ router.post('/', function(req, res) {
 
 // Protect dashboard route with JWT
 router.get('/dashboard', passport.authenticate('jwt', { session: false }), function(req, res) {
-    res.send('It worked! User id is: ' + req.user._id + '.' + '\n' + req.user.username + ' ' + req.user.email);
+    res.send('It worked! User id is: ' + req.user._id + '.'
+        + '\n' + req.user.username
+        + '\n' + 'email: ' + req.user.email
+        + '\n' + 'name: ' + req.user.firstName + ' ' + req.user.lastName);
 });
 
-
-/*
-router.get('/', passport.authenticate('local', {
-            session: false
-        }), serialize, generateToken, respond);
-*/
 module.exports = router;

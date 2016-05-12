@@ -7,6 +7,7 @@ router.post('/', function(req, res, next) {
     new User({
         name: req.body.name,
         username: req.body.username,
+        password: req.body.password,
         location: req.body.location,
         created_at: Date.now(),
         updated_at: Date.now()
