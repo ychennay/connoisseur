@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 
 // create a schema
 var ratingSchema = new Schema({
-    restaurantName: String,
+    restaurantId: String,
     username: String,
     rating: String,
     created_at: Date,

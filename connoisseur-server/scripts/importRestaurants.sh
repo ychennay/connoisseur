@@ -18,8 +18,8 @@ then
 	let idx=0
 	while IFS=$"†" read name location tags price meals menu address phone_number reviews food_types notes website
 	do
+		restaurantIdField='"restaurantId":"'"$idx"'"'
 		nameField='"name":"'"$name"'"'
-		usernameField='"username":"'"$idx"'"'
 		locationField='"location":"'"$location"'"'
 		tagsField='"tags":'$(listToBoolMap "$tags")
 		priceField='"price":"'"$price"'"'
@@ -31,7 +31,7 @@ then
 		foodTypesField='"food_types":'$(listToBoolMap "$food_types")
 		notesField='"notes":"'"$notes"'"'
 		websiteField='"website":"'"$website"'"'
-		jsonRequestBody='{'"$nameField"','"$usernameField"','"$locationField"','"$tagsField"','"$priceField"','"$mealsField"','"$menuField"','"$addressField"','"$phoneNumberField"','"$reviewsField"','"$foodTypesField"','"$notesField"','"$websiteField"'}'
+		jsonRequestBody='{'"$restaurantIdField"','"$nameField"','"$locationField"','"$tagsField"','"$priceField"','"$mealsField"','"$menuField"','"$addressField"','"$phoneNumberField"','"$reviewsField"','"$foodTypesField"','"$notesField"','"$websiteField"'}'
 		echo $jsonRequestBody
 		curl -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -d "$jsonRequestBody" "http://localhost:3000/addRestaurant"
 		idx=$((idx+1))

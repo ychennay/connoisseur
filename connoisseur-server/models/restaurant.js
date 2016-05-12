@@ -8,8 +8,8 @@ var Schema = mongoose.Schema;
 
 // create a schema
 var restaurantSchema = new Schema({
+    restaurantId: { type: String, required: true, unique: true },
     name: String,
-    username: { type: String, required: true, unique: true },
     location: String,
     tags: [{
         afternoon: {type: Boolean, default: false},
