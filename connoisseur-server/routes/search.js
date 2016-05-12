@@ -19,11 +19,31 @@ function isSubMap(map1, map2) {
 /* GET users listing. */
 router.get('/', passport.authenticate('jwt', {session:false}), function(req, res, next) {
 
+    //extract query parameters
 	var queriedRestaurantId = req.query.restaurantId ? req.query.restaurantId : '';
 	var queriedName = req.query.name ? req.query.name : '';
 	var queriedTags = req.query.tags ? JSON.parse(req.query.tags) : {};
 	var queriedFoodTypes = req.query.food_types ? JSON.parse(req.query.food_types) : {};
 	var queriedMeals = req.query.meals ? JSON.parse(req.query.meals) : {};
+
+    /*update this user's toplist*/
+
+    //sort this user's ratings
+
+
+
+    /* update users toplist
+     * search among toplist instaed of all restaurants
+     * limit by 5; if not enough in toplist, supplement with best ratings
+     *
+     * --updating toplist--
+     * sort all users ratings, including this users
+     * compute similarity{} for this user
+     * sort this similarity{}
+     * for each user U similar >0, add U's 'loved' ratings to this.top_list
+     * */
+
+
 
 	Restaurant.find({
 		// Retrieve the list of all restaurants matching the queried restaurant
@@ -43,13 +63,13 @@ router.get('/', passport.authenticate('jwt', {session:false}), function(req, res
 		});
 		// Send final list of restaurants to client.
 		//res.send(restaurants);
-        
-        res.send(
+        res.send(req.user.ratings);
+        /*res.send(
         'It worked! User id is: ' + req.user._id + '.'
             + '\n' + req.user.username
                 + '\n' + 'email: ' + req.user.email
                     + '\n' + 'name: ' + req.user.firstName + ' ' + req.user.lastName    
-        );
+        );*/
 	})
 	.sort('+restaurantId');
 });

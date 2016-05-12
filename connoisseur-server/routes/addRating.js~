@@ -23,15 +23,14 @@ router.post('/', function(req, res, next) {
         });
 
     //update the associated User
+//    User.findOneAndUpdate(
+//        {"username"}
+//    );
     User.findOneAndUpdate(
-        {"username": "a"},
-        {"lastName": "newlastname"}
-    );
-/*    User.findOneAndUpdate(
         {"username": req.body.username},
         {$push: {"ratings": {"restaurantId": req.body.restaurantId, 
                            "rating": req.body.rating}}}
-    );*/
+    );
 });
 
 module.exports = router;
