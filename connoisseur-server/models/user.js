@@ -20,6 +20,7 @@ var userSchema = new Schema({
     }],
     ratings: [{
         restaurantId: String,
+        restaurantName: String,
         rating: {
             type: String,
             enum: ['love', 'like', 'dislike']

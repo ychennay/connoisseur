@@ -3,6 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 var Rating = require('../models/rating');
 var User = require('../models/user');
+var Restaurant = require('../models/restaurant');
 
 router.post('/', passport.authenticate('jwt', { session: false }), function(req, res) {
     
@@ -10,32 +11,37 @@ router.post('/', passport.authenticate('jwt', { session: false }), function(req,
     var username = req.user.username;
     var rating = req.body.rating;
 
-    User.findOneAndUpdate({
-        username: username
-    }, {
-        $push: {
-            ratings: {
+    Restaurant.findOne({
+        restaurantId: restaurantId
+    }, function (err, theRestaurant){
+        User.findOneAndUpdate({
+            username: username
+        }, {
+            $push: {
+                ratings: {
+                    restaurantId: restaurantId,
+                    restaurantName: theRestaurant.name,
+                    rating: rating
+                }
+            }
+        }, {
+            upsert: false
+        }, function(err) {
+            new Rating({
                 restaurantId: restaurantId,
-                rating: rating
-            }
-        }
-    }, {
-        upsert: false
-    }, function(err) {
-        new Rating({
-            restaurantId: restaurantId,
-            username: username,
-            rating: rating,
-            created_at: Date.now(),
-            updated_at: Date.now()
-        }).save( function(err) {
-            if (err) {
-                res.sendStatus(400);
-                console.log(err);
-            }
-            else {
-                res.sendStatus(200);
-            }
+                username: username,
+                rating: rating,
+                created_at: Date.now(),
+                updated_at: Date.now()
+            }).save( function(err) {
+                if (err) {
+                    res.sendStatus(400);
+                    console.log(err);
+                }
+                else {
+                    res.sendStatus(200);
+                }
+            });
         });
     });
 });
