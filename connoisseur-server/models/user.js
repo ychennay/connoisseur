@@ -16,7 +16,7 @@ var userSchema = new Schema({
     lastName: String,
     location: [{ 
         lattitude: Number,
-        longitude: Number,
+        longitude: Number
     }],
     ratings: [{
         restaurantId: String,
