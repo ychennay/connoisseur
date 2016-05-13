@@ -11,6 +11,9 @@ var restaurantSchema = new Schema({
     restaurantId: { type: String, required: true, unique: true },
     name: String,
     location: String,
+    address: String,
+    lattitude: Number,
+    longitude: Number,
     tags: [{
         afternoon: {type: Boolean, default: false},
         authentic: {type: Boolean, default: false},
@@ -106,7 +109,6 @@ var restaurantSchema = new Schema({
         lunch: {type: Boolean, default: false}
     }],
     menu: String,
-    address: String,
     phone_number: String,
     reviews: String,
     food_types: [{
