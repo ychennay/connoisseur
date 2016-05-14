@@ -13,7 +13,6 @@ $ npm install
 ```
 
 # How to run:
-=======
 ```
 From /connoisseur-server
 $ mkdir data
