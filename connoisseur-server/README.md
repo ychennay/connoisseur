@@ -19,6 +19,8 @@ $ sudo npm install
 ```
 From /connoisseur-server
 $ mkdir data
+$ sudo mongod --dbpath data/
+$ npm start
 $ ./scripts/importRestaurants.sh ./dsv/santamonica.dsv
 ```
 
