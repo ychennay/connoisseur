@@ -7,15 +7,19 @@
 /users, /ratings, /restaurants: View data for corresponding db model
 ```
 
+# Set-up:
+```
+$ npm install
+```
 
 # How to run:
 =======
 ```
-From connoisseur-server/ directory
-
-$ npm install
+From /connoisseur-server
 $ mkdir data
-$ sudo mongod --dbpath data/ (Make sure mongodb is installed)
+$ sudo mongod --dbpath data/
 $ npm start
+
+Check out routes by 
 $ chrome localhost:3000/<routename>
 ```
