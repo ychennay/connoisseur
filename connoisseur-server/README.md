@@ -9,7 +9,9 @@
 
 # Set-up:
 ```
-$ npm install
+$ git clone https://github.com/yingjia987/connoisseur
+$ git pull
+$ sudo npm install
 ```
 
 # How to run:
