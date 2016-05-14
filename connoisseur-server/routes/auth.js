@@ -9,7 +9,7 @@ var User = require('../models/user');
 
 // Authenticate the user and get a JSON Web Token to include in the header of future requests.
 router.post('/', function(req, res) {
-    console.log(req);
+    //console.log(req);
     User.findOne({
         username: req.body.username
     }, function(err, user) {

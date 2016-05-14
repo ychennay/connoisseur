@@ -16,11 +16,11 @@ router.post('/', function(req, res, next) {
   }).save( function(err) {
       if (err) {
         //res.sendStatus(400);
-        res.send(err.message);
+        res.send({ success: false, message: err.message });
         console.log(err);
       }
       else {
-        res.sendStatus(200);
+        res.send({ success: true, message: 'User successfully registered' });
       }
     });
 });
