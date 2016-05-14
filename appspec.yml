@@ -24,7 +24,7 @@ os: linux
 #   may cause associated deployments to fail.
 files:
   - source: connoisseur-server
-    destination: /var
+    destination: /
 # For deployments to Amazon Linux, Ubuntu Server, or RHEL instances,
 #   you can specify a "permissions" 
 #   section here that describes special permissions to apply to the files 
@@ -68,10 +68,10 @@ hooks:
       runas: root
 # During the BeforeInstall deployment lifecycle event, run the commands 
 #   in the script specified in "location".
-  BeforeInstall: 
-    - location: scripts/install_dependencies.sh
-      timeout: 300
-      runas: root
+#  BeforeInstall: 
+#    - location: scripts/install_dependencies.sh
+#      timeout: 300
+#      runas: root
 # During the AfterInstall deployment lifecycle event, run the commands 
 #   in the script specified in "location".
   AfterInstall:
