@@ -8,19 +8,37 @@
 ```
 
 # Set-up:
+## General
 ```
 $ git clone https://github.com/yingjia987/connoisseur
 $ git pull
 $ sudo npm install
 ```
 
-# How to run:
+##Loading data
 ```
 From /connoisseur-server
 $ mkdir data
+$ ./scripts/importRestaurants.sh ./dsv/santamonica.dsv
+```
+
+# How to run:
+```
+From /connoisseur-server
 $ sudo mongod --dbpath data/
 $ npm start
 
 Check out routes by 
 $ chrome localhost:3000/<routename>
+```
+
+### Clearing data
+```
+From /connoisseur-server
+$ sudo mongod --dbpath data/
+In another tab...
+$ mongo
+> use gettingstarted
+> db.restaurants.drop();
+> exit
 ```
