@@ -16,10 +16,12 @@ router.post('/', function(req, res, next) {
   }).save( function(err) {
       if (err) {
         //res.sendStatus(400);
-        res.send({ success: false, message: err.message });
+        //res.statusCode = 400;
+        res.send({ success: false, message: 'User cannot be registered' + err});
         console.log(err);
       }
       else {
+        res.statusCode = 200;
         res.send({ success: true, message: 'User successfully registered' });
       }
     });
