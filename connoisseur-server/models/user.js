@@ -15,7 +15,7 @@ var userSchema = new Schema({
     firstName: String,
     lastName: String,
     location: [{ 
-        lattitude: Number,
+        latitude: Number,
         longitude: Number
     }],
     ratings: [{

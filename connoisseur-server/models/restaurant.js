@@ -12,7 +12,7 @@ var restaurantSchema = new Schema({
     name: String,
     location: String,
     address: String,
-    lattitude: Number,
+    latitude: Number,
     longitude: Number,
     tags: [{
         afternoon: {type: Boolean, default: false},

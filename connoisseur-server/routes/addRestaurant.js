@@ -18,13 +18,13 @@ router.post('/', function(req, res, next) {
         });
         apiResponse.on('end', function() {
             var dataObject = JSON.parse(data);
-            var lattitude = dataObject["results"][0]["geometry"]["location"]["lat"];
+            var latitude = dataObject["results"][0]["geometry"]["location"]["lat"];
             var longitude = dataObject["results"][0]["geometry"]["location"]["lng"];
             new Restaurant({
                 restaurantId: req.body.restaurantId,
                 name: req.body.name,
                 location: req.body.location,
-                lattitude: lattitude,
+                latitude: latitude,
                 longitude: longitude,
                 tags: req.body.tags,
                 price: req.body.price,

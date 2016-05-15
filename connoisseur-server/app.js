@@ -17,6 +17,7 @@ var ratings = require('./routes/ratings');
 var restaurants = require('./routes/restaurants');
 var addRestaurant = require('./routes/addRestaurant');
 var addRating = require('./routes/addRating');
+var addUser = require('./routes/addUser');
 var auth = require('./routes/auth');
 
 // view engine setup
@@ -60,6 +61,7 @@ app.use('/restaurants', restaurants);
 app.use('/auth', auth);
 app.use('/addRestaurant', addRestaurant);
 app.use('/addRating', addRating);
+app.use('/addUser', addUser);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

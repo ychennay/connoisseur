@@ -25,8 +25,6 @@ os: linux
 files:
   - source: connoisseur-server
     destination: /
-  - source:
-    destination:
 # For deployments to Amazon Linux, Ubuntu Server, or RHEL instances,
 #   you can specify a "permissions" 
 #   section here that describes special permissions to apply to the files 
@@ -37,25 +35,10 @@ files:
 #   then remove the 
 #   "permissions" section altogether. A blank or incomplete "permissions"
 #   section may cause associated deployments to fail.
-permissions:
-  - object:
-    pattern:
-    except:
-    owner:
-    group:
-    mode: 
-    acls:
-      -
-    context:
-      user:
-      type:
-      range:
-    type:
-      -
 # If you are not running any commands on the Amazon EC2 instance, then remove 
 #   the "hooks" section altogether. A blank or incomplete "hooks" section
 #   may cause associated deployments to fail.
-hooks:
+#hooks:
 # For each deployment lifecycle event, specify multiple "location" entries 
 #   if you want to run multiple scripts during that event.
 # You can specify "timeout" as the number of seconds to wait until failing the deployment 
@@ -79,46 +62,27 @@ hooks:
 # During the ApplicationStop deployment lifecycle event, run the commands 
 #   in the script specified in "location" starting from the root of the 
 #   revision's file bundle.
-  ApplicationStop:
-    - location: 
-      timeout:
-      runas:
-    - location: 
-      timeout:
-      runas: 
+#  ApplicationStop:
+#    - location: scripts/stop_server.sh
+#      timeout: 300
+#      runas: root
 # During the BeforeInstall deployment lifecycle event, run the commands 
 #   in the script specified in "location".
-  BeforeInstall:
-    - location: 
-      timeout:
-      runas: 
-    - location: 
-      timeout:
-      runas:
+#  BeforeInstall: 
+#    - location: scripts/install_dependencies.sh
+#      timeout: 300
+#      runas: root
 # During the AfterInstall deployment lifecycle event, run the commands 
 #   in the script specified in "location".
-  AfterInstall:
-    - location:     
-      timeout: 
-      runas:
-    - location: 
-      timeout:
-      runas:
+#  AfterInstall:
+#    - location: scripts/change_permissions.sh
+#      timeout: 300
+#      runas: root
 # During the ApplicationInstall deployment lifecycle event, run the commands 
 #   in the script specified in "location".
-  ApplicationStart:
-    - location:     
-      timeout: 
-      runas:
-    - location: 
-      timeout:
-      runas:
+#  ApplicationStart: 
+#    - location: scripts/start_server.sh
+#      timeout: 300
+#      runas: root
 # During the ValidateService deployment lifecycle event, run the commands 
 #   in the script specified in "location".
-  ValidateService:
-    - location:     
-      timeout: 
-      runas:
-    - location: 
-      timeout:
-      runas:
