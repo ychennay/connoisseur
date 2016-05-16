@@ -13,36 +13,76 @@ router.post('/', passport.authenticate('jwt', { session: false }), function(req,
 
     Restaurant.findOne({
         restaurantId: restaurantId
-    }, function (err, theRestaurant){
+    }, function (err, theRestaurant) {
         User.findOneAndUpdate({
             username: username
-        }, {
-            $push: {
+        },{
+            $pull: {
                 ratings: {
-                    restaurantId: restaurantId,
-                    restaurantName: theRestaurant.name,
-                    rating: rating
+                    restaurantId: restaurantId
                 }
             }
-        }, {
-            upsert: false
-        }, function(err) {
-            new Rating({
-                restaurantId: restaurantId,
-                username: username,
-                rating: rating,
-                created_at: Date.now(),
-                updated_at: Date.now()
-            }).save( function(err) {
-                if (err) {
-                    res.sendStatus(400);
-                    console.log(err);
+        }).then(function (theUser) {
+            User.update({
+                _id: theUser["_id"]
+            },{
+                $push: {
+                    ratings: {
+                        restaurantId: restaurantId,
+                        restaurantName: theRestaurant.name,
+                        rating: rating
+                    }
                 }
-                else {
-                    res.sendStatus(200);
-                }
-            });
+            }, function (e) {});
         });
+
+        Rating.findOneAndUpdate({
+            restaurantId: restaurantId,
+            username: username
+        },{
+            rating: rating
+        },{
+            upsert: true
+        }, function(err, theRating) {
+            if (err) {
+                res.sendStatus(400);
+                console.log(err);
+            }
+            else {
+                res.sendStatus(200);
+            }
+        });
+
+        // User.findOneAndUpdate({
+        //     username: username
+        // }, {
+        //     $push: {
+        //         ratings: {
+        //             restaurantId: restaurantId,
+        //             restaurantName: theRestaurant.name,
+        //             rating: rating
+        //         }
+        //     }
+        // }, {
+        //     upsert: false
+        // }, function(err) {
+        //     new Rating({
+        //         restaurantId: restaurantId,
+        //         username: username,
+        //         rating: rating,
+        //         created_at: Date.now(),
+        //         updated_at: Date.now()
+        //     }).save( function(err) {
+        //         if (err) {
+        //             res.sendStatus(400);
+        //             console.log(err);
+        //         }
+        //         else {
+        //             res.sendStatus(200);
+        //         }
+        //     });
+        // });
+        // res.sendStatus(200);
     });
 });
 
