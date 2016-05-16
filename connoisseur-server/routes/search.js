@@ -194,109 +194,109 @@ router.get('/', passport.authenticate('jwt', {session:false}), function(req, res
     						}
 
     						//build new toplist for this user
-    						var m = new Map();
-    						for(var i = 0; i < similarUsers.length; i++){
-    							var curSimilarUsername = similarUsers[i];
+    						User.find({
+    							username: {
+    								$in: similarUsers
+    							}
+    						}, function (err, similarUsersArray){
+    							var m = new Map();
+    							for(var i = 0; i < similarUsersArray.length; i++){
+    								//grab that similar user's 'loved' restaurants
+					    			var curSimilarUserRatings = similarUsersArray[i].ratings;
+					    			var curSimilarUserLoved = [];
 
-    							//grab each similar user
-    							User.findOne({
-					    			username: curSimilarUsername
-					    		}, function (err, similarUser){
-					    			//grab that similar user's 'loved' restaurants
-					    			var allRatings = similarUser.ratings;
-					    			var lovedRestaurants = [];
-					    			for(var i = 0; i < allRatings.length; i++){
-					    				if(allRatings[i].rating == "love"){
-					    					lovedRestaurants.push(allRatings[i].restaurantId);
+					    			for(var j = 0; j < curSimilarUserRatings.length; j++){
+					    				if(curSimilarUserRatings[j].rating == "love"){
+					    					curSimilarUserLoved.push(curSimilarUserRatings[j].restaurantId);
 					    				}
 					    			}
 
 					    			//add similar user's 'loved' restaurants to our map
-					    			for(var i = 0; i < lovedRestaurants.length; i++){
-					    				if(m.contains(lovedRestaurants[i])){
-					    					m.put(lovedRestaurants[i], m.get(lovedRestaurants[i]) + 1);
+					    			for(var j = 0; j < curSimilarUserLoved.length; j++){
+					    				if(m.contains(curSimilarUserLoved[j])){
+					    					m.put(curSimilarUserLoved[j], m.get(curSimilarUserLoved[j]) + 1);
 					    				}
 					    				else{
-					    					m.put(lovedRestaurants[i], 1);
+					    					m.put(curSimilarUserLoved[j], 1);
 					    				}
 					    			}
-					    		});
-    						} //end for loop through each similar user
+    							} //end for loop through each similar user
 
-    						//we now have 'm', a map of the toplist for this user
-    						var topListArray = m.entrys();
+    							//we now have 'm', a map of the toplist for this user
+	    						var topListArray = m.entrys();
 
-    						//sort toplist in descending order
-    						topListArray.sort(function (a,b) {
-    							return  b.score - a.score;
+	    						//sort toplist in descending order
+	    						topListArray.sort(function (a,b) {
+	    							return  b.score - a.score;
+	    						});
+
+	    						//write the new toplist back
+	    						User.update(
+	    							{username: req.user.username},
+	    							{
+	    								$set:{
+			    							topList: topListArray
+			    						}
+	    							}, function (err){
+	    								//finally, we do the returning of search results (5)
+
+	    								//find all the toplist restaurants
+	    								var topListRestaurants = [];
+	    								for(var i = 0; i < topListArray.length; i++){
+	    									Restaurant.findOne(
+	    										{
+	    											restaurantId: topListArray[i].restaurantId
+	    										}, function (err, topRestaurant){
+	    											topListRestaurants.push(topRestaurant);
+	    										}
+	    									);
+	    								}
+
+	    								//filter the top restaurants by the filters requested
+	    								topListRestaurants = topListRestaurants.filter(function (restaurant){
+	    									var restaurantTags = restaurant['tags'][0];
+											var restaurantFoodTypes = restaurant['food_types'][0];
+											var restaurantMeals = restaurant['meals'][0];
+											return (isSubMap(queriedTags, restaurantTags)
+												&&	isSubMap(queriedFoodTypes, restaurantFoodTypes)
+												&&	isSubMap(queriedMeals, restaurantMeals));
+	    								});
+
+	    								//we only return top 5 results
+	    								if(topListRestaurants.length >= 5){
+	    									res.send(topListRestaurants.slice(0,5));
+	    								}
+	    								else{
+	    									//not enough toplist restaurants, supplement
+	    									//with regularly searched restaurants
+	    									var numRestaurantsNeeded = 5 - topListRestaurants.length;
+
+	    									Restaurant.find({
+												// Retrieve the list of all restaurants matching the queried restaurant
+												// id and name.
+												name : new RegExp('^.*' + queriedName + '.*$', "i")
+											}, function (err, restaurants) {
+												// Filter the restaurants to only those matching the queried tags, food
+												// types, and meals.
+												restaurants = restaurants.filter(function(restaurant) {
+													var restaurantTags = restaurant['tags'][0];
+													var restaurantFoodTypes = restaurant['food_types'][0];
+													var restaurantMeals = restaurant['meals'][0];
+													return (isSubMap(queriedTags, restaurantTags)
+														&&	isSubMap(queriedFoodTypes, restaurantFoodTypes)
+														&&	isSubMap(queriedMeals, restaurantMeals));
+												});
+
+												//send final list of restaurants to client:
+												//toplist :: rest of restaurants
+												res.send(topListRestaurants.concat(restaurants.slice(0, numRestaurantsNeeded)));
+											})
+											.sort('+restaurantId');
+	    								}
+										//end of logic
+	    							}
+	    						);
     						});
-
-    						//write the new toplist back
-    						User.update(
-    							{username: req.user.username},
-    							{
-    								$set:{
-		    							topList: topListArray
-		    						}
-    							}, function (err){
-    								//finally, we do the returning of search results (5)
-
-    								//find all the toplist restaurants
-    								var topListRestaurants = [];
-    								for(var i = 0; i < topListArray.length; i++){
-    									Restaurant.findOne(
-    										{
-    											restaurantId: topListArray[i].restaurantId
-    										}, function (err, topRestaurant){
-    											topListRestaurants.push(topRestaurant);
-    										}
-    									);
-    								}
-
-    								//filter the top restaurants by the filters requested
-    								topListRestaurants = topListRestaurants.filter(function (restaurant){
-    									var restaurantTags = restaurant['tags'][0];
-										var restaurantFoodTypes = restaurant['food_types'][0];
-										var restaurantMeals = restaurant['meals'][0];
-										return (isSubMap(queriedTags, restaurantTags)
-											&&	isSubMap(queriedFoodTypes, restaurantFoodTypes)
-											&&	isSubMap(queriedMeals, restaurantMeals));
-    								});
-
-    								//we only return top 5 results
-    								if(topListRestaurants.length >= 5){
-    									res.send(topListRestaurants.slice(0,5));
-    								}
-    								else{
-    									//not enough toplist restaurants, supplement
-    									//with regularly searched restaurants
-    									var numRestaurantsNeeded = 5 - topListRestaurants.length;
-
-    									Restaurant.find({
-											// Retrieve the list of all restaurants matching the queried restaurant
-											// id and name.
-											name : new RegExp('^.*' + queriedName + '.*$', "i")
-										}, function (err, restaurants) {
-											// Filter the restaurants to only those matching the queried tags, food
-											// types, and meals.
-											restaurants = restaurants.filter(function(restaurant) {
-												var restaurantTags = restaurant['tags'][0];
-												var restaurantFoodTypes = restaurant['food_types'][0];
-												var restaurantMeals = restaurant['meals'][0];
-												return (isSubMap(queriedTags, restaurantTags)
-													&&	isSubMap(queriedFoodTypes, restaurantFoodTypes)
-													&&	isSubMap(queriedMeals, restaurantMeals));
-											});
-
-											//send final list of restaurants to client:
-											//toplist :: rest of restaurants
-											res.send(topListRestaurants.concat(restaurants.slice(0, numRestaurantsNeeded)));
-										})
-										.sort('+restaurantId');
-    								}
-									//end of logic
-    							}
-    						);
 						}
 					);
     			});
