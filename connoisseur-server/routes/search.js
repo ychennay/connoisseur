@@ -85,6 +85,18 @@ router.get('/', passport.authenticate('jwt', {session:false}), function(req, res
 	5. compute user.topList for THIS user and update db
 	6. return top 5 results from toplist
 	7. if not enough restaurants from toplist, supplement it with generally-searched restaurants
+
+
+	Computation of similarity
+
+	> ranges from 0.0 to 1.0 (weighted average of similarity scores)
+	> greater than 0.5 is considered similar
+	love-love		+ 1.0
+	like-like		+ 1.0
+	dislike-dislike	+ 1.0
+	love-like		+ 0.7
+	like-dislike	+ 0.2
+	love-dislike	+ 0.0
 	*/
 
     User.update(
