@@ -19,3 +19,4 @@ hooks:
   ValidateService:
     + location: /connoisseur-server/node-modules/codedeploy-scripts/src/deployment.js
       timeout: 180
+      
