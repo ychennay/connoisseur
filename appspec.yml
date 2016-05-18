@@ -1,21 +1,21 @@
 version: 0.0
 os: linux
 files:
-    - source: connoisseur-server
+    + source: connoisseur-server
       destination: /app/connoisseur
 hooks:
-  ApplicationStop:
-    - location: /connoisseur-server/node-modules/codedeploy-scripts/src/deployment.js
-      timeout: 180
+#  ApplicationStop:
+#    - location: deployment.js
+#      timeout: 180
   BeforeInstall:
-    - location: /connoisseur-server/node-modules/codedeploy-scripts/src/deployment.js
+    + location: deployScript.js
       timeout: 180
   AfterInstall:
-    - location: /connoisseur-server/node-modules/codedeploy-scripts/src/deployment.js
+    + location: deployScript.js
       timeout: 180
   ApplicationStart:
-    - location: /connoisseur-server/node-modules/codedeploy-scripts/src/deployment.js
+    + location: deployScript.js
       timeout: 180
   ValidateService:
-    - location: /connoisseur-server/node-modules/codedeploy-scripts/src/deployment.js
+    + location: deployScript.js
       timeout: 180
