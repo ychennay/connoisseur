@@ -4,9 +4,9 @@ files:
     + source: connoisseur-server
       destination: /app/connoisseur
 hooks:
-#  ApplicationStop:
-#    - location: deployment.js
-#      timeout: 180
+  ApplicationStop:
+    - location: /connoisseur-server/node-modules/codedeploy-scripts/src/deployment.js
+      timeout: 180
   BeforeInstall:
     + location: /connoisseur-server/node-modules/codedeploy-scripts/src/deployment.js
       timeout: 180
@@ -19,4 +19,3 @@ hooks:
   ValidateService:
     + location: /connoisseur-server/node-modules/codedeploy-scripts/src/deployment.js
       timeout: 180
-      
