@@ -3,19 +3,21 @@ os: linux
 files:
     - source: connoisseur-server
       destination: /app/connoisseur
+    - source: deployScript.js
+      destination: /app/connoisseur
 hooks:
 #  ApplicationStop:
 #    - location: deployment.js
 #      timeout: 180
   BeforeInstall:
-    - location: deployScript.js
+    - location: /app/connoisseur/deployScript.js
       timeout: 180
   AfterInstall:
-    - location: deployScript.js
+    - location: /app/connoisseur/deployScript.js
       timeout: 180
   ApplicationStart:
-    - location: deployScript.js
+    - location: /app/connoisseur/deployScript.js
       timeout: 180
   ValidateService:
-    - location: deployScript.js
+    - location: /app/connoisseur/deployScript.js
       timeout: 180
