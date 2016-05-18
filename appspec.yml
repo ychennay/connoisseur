@@ -8,14 +8,14 @@ hooks:
 #    - location: deployment.js
 #      timeout: 180
   BeforeInstall:
-    - location: deployScript.js
+    - location: scripts/install_dependencies.sh
       timeout: 180
-  AfterInstall:
-    - location: deployScript.js
-      timeout: 180
+#  AfterInstall:
+#    - location: deployScript.js
+#      timeout: 180
   ApplicationStart:
-    - location: deployScript.js
+    - location: scripts/start_server.sh
       timeout: 180
-  ValidateService:
-    - location: deployScript.js
-      timeout: 180
+#  ValidateService:
+#    - location: deployScript.js
+#      timeout: 180
