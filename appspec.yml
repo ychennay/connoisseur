@@ -10,14 +10,14 @@ hooks:
 #    - location: deployment.js
 #      timeout: 180
   BeforeInstall:
-    - location: /app/connoisseur/deployScript.js
+    - location: deployScript.js
       timeout: 180
   AfterInstall:
-    - location: /app/connoisseur/deployScript.js
+    - location: deployScript.js
       timeout: 180
   ApplicationStart:
-    - location: /app/connoisseur/deployScript.js
+    - location: deployScript.js
       timeout: 180
   ValidateService:
-    - location: /app/connoisseur/deployScript.js
+    - location: deployScript.js
       timeout: 180
