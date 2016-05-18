@@ -3,8 +3,6 @@ os: linux
 files:
     - source: connoisseur-server
       destination: /app/connoisseur
-    - source: deployScript.js
-      destination: /app/connoisseur
 hooks:
 #  ApplicationStop:
 #    - location: deployment.js
