@@ -24,7 +24,7 @@ $ npm start
 $ ./scripts/importRestaurants.sh ./dsv/santamonica.dsv
 ```
 
-# How to run:
+# How to run (via Local Machine):
 ```
 From /connoisseur-server
 $ sudo mongod --dbpath data/
@@ -44,3 +44,28 @@ $ mongo
 > db.restaurants.drop();
 > exit
 ```
+
+# How to run (via AWS):
+```
+$ ssh -i mongo.pem mms-user@con-db-0.connoisseur.3043.mongodbdns.com
+$ cd connoisseur/connoisseur-server
+$ sudo mongod --dbpath data/
+In another tab...
+$ ssh -i connoisseurKeyPair.pem ec2-user@ec2-54-187-107-93.us-west-2.compute.amazonaws.com
+$ cd connoisseur/connoisseur-server
+$ npm start
+
+Check out routes by 
+$ chrome ec2-54-187-107-93.us-west-2.compute.amazonaws.com:3000/<routename>
+```
+
+# Update application on servers:
+```
+$ ssh -i mongo.pem mms-user@con-db-0.connoisseur.3043.mongodbdns.com
+$ cd connoisseur
+$ git pull
+$ ssh -i connoisseurKeyPair.pem ec2-user@ec2-54-187-107-93.us-west-2.compute.amazonaws.com
+$ cd connoisseur
+$ git pull
+```
+
