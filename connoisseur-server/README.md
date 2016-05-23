@@ -69,3 +69,25 @@ $ cd connoisseur
 $ git pull
 ```
 
+# Shut down server/database
+```
+$ ssh -i mongo.pem mms-user@con-db-0.connoisseur.3043.mongodbdns.com
+$ screen -R (this reconnects to the existing terminal session where the db is running)
+$ (Make your changes)
+
+$ ssh -i connoisseurKeyPair.pem ec2-user@ec2-54-187-107-93.us-west-2.compute.amazonaws.com
+$ screen -R (this reconnects to the existing terminal session where the app is running)
+$ (Make your changes)
+```
+
+
+# Start server/database
+```
+$ ssh -i mongo.pem mms-user@con-db-0.connoisseur.3043.mongodbdns.com
+$ screen (creates a terminal session that won't close when ssh closes)
+$ mongod --dbpath data
+
+$ ssh -i connoisseurKeyPair.pem ec2-user@ec2-54-187-107-93.us-west-2.compute.amazonaws.com
+$ screen (creates a terminal session that won't close when ssh closes)
+$ nodemon start
+```
