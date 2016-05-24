@@ -14,9 +14,11 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var search = require('./routes/search');
 var ratings = require('./routes/ratings');
+var bookmarks = require('./routes/bookmarks');
 var restaurants = require('./routes/restaurants');
 var addRestaurant = require('./routes/addRestaurant');
 var addRating = require('./routes/addRating');
+var addBookmark = require('./routes/addBookmark');
 var addUser = require('./routes/addUser');
 var auth = require('./routes/auth');
 
@@ -55,12 +57,14 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/search', search);
 app.use('/ratings', ratings);
+app.use('/bookmarks', bookmarks);
 app.use('/restaurants', restaurants);
 
 // POST routes
 app.use('/auth', auth);
 app.use('/addRestaurant', addRestaurant);
 app.use('/addRating', addRating);
+app.use('/addBookmark', addBookmark);
 app.use('/addUser', addUser);
 
 // catch 404 and forward to error handler
