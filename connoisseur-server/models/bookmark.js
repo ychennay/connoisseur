@@ -7,17 +7,16 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // create a schema
-var ratingSchema = new Schema({
+var bookmarkSchema = new Schema({
     restaurantId: String,
     username: String,
-    rating: String,
     created_at: Date,
     updated_at: Date
 });
 
 // the schema is useless so far
 // we need to create a model using it
-var Rating = mongoose.model('Rating', ratingSchema);
+var Bookmark = mongoose.model('Bookmark', bookmarkSchema);
 
 // make this available to our users in our Node applications
-module.exports = Rating;
+module.exports = Bookmark;
