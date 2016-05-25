@@ -19,6 +19,7 @@ var restaurants = require('./routes/restaurants');
 var addRestaurant = require('./routes/addRestaurant');
 var addRating = require('./routes/addRating');
 var addBookmark = require('./routes/addBookmark');
+var removeBookmark = require('./routes/removeBookmark');
 var addUser = require('./routes/addUser');
 var auth = require('./routes/auth');
 
@@ -65,6 +66,7 @@ app.use('/auth', auth);
 app.use('/addRestaurant', addRestaurant);
 app.use('/addRating', addRating);
 app.use('/addBookmark', addBookmark);
+app.use('/removeBookmark', removeBookmark);
 app.use('/addUser', addUser);
 
 // catch 404 and forward to error handler

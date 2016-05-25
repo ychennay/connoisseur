@@ -14,28 +14,27 @@ router.post('/', passport.authenticate('jwt', { session: false }), function(req,
     var username = req.user.username;
 
     Bookmark.findOne({
+        username: username,
         restaurantId: restaurantId
-    }, function (err, theRestaurant) {
-        User.findOneAndUpdate({
-            username: username
-        },{
-            $pull: {
-                ratings: {
-                    restaurantId: restaurantId
+    }, function (err, bookmark) {
+        if (bookmark === null) {
+            res.send({success: false, message: 'Bookmark does not exist'});
+        } else if (err) {
+            res.send({success: false, message: 'Bookmark cannot be removed' + err});
+        } else {
+            bookmark.remove(function (err) {
+                if (err) {
+                    //res.sendStatus(400);
+                    //res.statusCode = 400;
+                    res.send({success: false, message: 'Bookmark cannot be removed' + err});
+                    console.log(err);
                 }
-            }
-        }).then(function (theUser) {
-            User.update({
-                _id: theUser["_id"]
-            },{
-                $push: {
-                    ratings: {
-                        restaurantId: restaurantId,
-                        restaurantName: theRestaurant.name
-                    }
+                else {
+                    res.statusCode = 200;
+                    res.send({success: true, message: 'Bookmark successfully removed'});
                 }
-            }, function (e) {});
-        });
+            });
+        }
     });
 });
 

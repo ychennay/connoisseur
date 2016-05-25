@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 
 // create a schema
 var bookmarkSchema = new Schema({
-    restaurantId: String,
+    restaurantId: {type: String, required: true },
     username: String,
     created_at: Date,
     updated_at: Date
