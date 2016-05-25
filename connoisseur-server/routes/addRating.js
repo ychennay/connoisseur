@@ -45,11 +45,11 @@ router.post('/', passport.authenticate('jwt', { session: false }), function(req,
             upsert: true
         }, function(err, theRating) {
             if (err) {
-                res.sendStatus(400);
+                res.send({success: false, message: 'Rating could not be saved' + err});
                 console.log(err);
             }
             else {
-                res.sendStatus(200);
+                rres.send({success: true, message: 'Rating successfully saved'});
             }
         });
 
