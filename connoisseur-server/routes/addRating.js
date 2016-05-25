@@ -49,7 +49,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), function(req,
                 console.log(err);
             }
             else {
-                rres.send({success: true, message: 'Rating successfully saved'});
+                res.send({success: true, message: 'Rating successfully saved'});
             }
         });
 
