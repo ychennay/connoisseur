@@ -4,12 +4,14 @@
 
 // grab the things we need
 var mongoose = require('mongoose');
+var Restaurant = require('./restaurant');
 var Schema = mongoose.Schema;
 
 // create a schema
 var bookmarkSchema = new Schema({
     restaurantId: {type: String, required: true },
     username: String,
+    restaurant: Object,
     created_at: Date,
     updated_at: Date
 });
