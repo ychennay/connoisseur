@@ -1,5 +1,4 @@
 var express = require('express');
-var fs = require('fs');
 var router = express.Router();
 var Restaurant = require('../models/restaurant');
 var https = require('https');
@@ -11,10 +10,6 @@ router.post('/', function(req, res, next) {
     var cleanedAddress = address.replace(/ /i, "+");
     console.log(cleanedAddress);
     var latLongApiAddress = "https://maps.googleapis.com/maps/api/geocode/json?address=" + cleanedAddress + "&key=" + apiKey;
-    var imgStuff = {
-        data: fs.readFileSync(req.body.imgPath),
-        contentType: 'image/png'
-    };
 
     https.get(latLongApiAddress, function(apiResponse) {
         var data = '';
@@ -28,7 +23,7 @@ router.post('/', function(req, res, next) {
             new Restaurant({
                 restaurantId: req.body.restaurantId,
                 name: req.body.name,
-                img: imgStuff,
+                imgPath: req.body.imgPath,
                 location: req.body.location,
                 latitude: latitude,
                 longitude: longitude,

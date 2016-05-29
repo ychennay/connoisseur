@@ -9,7 +9,7 @@ var Schema = mongoose.Schema;
 // create a schema
 var restaurantSchema = new Schema({
     restaurantId: { type: String, required: true, unique: true },
-    img: { data: Buffer, contentType: String },
+    imgPath: String,
     name: String,
     location: String,
     address: String,
