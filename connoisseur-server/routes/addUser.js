@@ -17,7 +17,11 @@ router.post('/', function(req, res, next) {
       if (err) {
         //res.sendStatus(400);
         //res.statusCode = 400;
-        res.send({ success: false, message: 'User cannot be registered' + err});
+        if (err.code === 11000) {
+          res.send({success: false, message: 'Username already taken'});
+        } else {
+          res.send({success: false, message: 'User could not be registered ' + err});
+        }
         console.log(err);
       }
       else {
