@@ -16,9 +16,12 @@ if [ $# -gt 0 ]
 then
 	echo "Importing restaurants from '$1'..."
 	let idx=0
+	arr=(images/*) #images
+
 	while IFS=$"†" read name location tags price meals menu address phone_number reviews food_types notes website
 	do
 		restaurantIdField='"restaurantId":"'"$idx"'"'
+		imgPathField='"imgPath":"'"${arr[$idx]}"'"'
 		nameField='"name":"'"$name"'"'
 		locationField='"location":"'"$location"'"'
 		tagsField='"tags":'$(listToBoolMap "$tags")
@@ -31,7 +34,7 @@ then
 		foodTypesField='"food_types":'$(listToBoolMap "$food_types")
 		notesField='"notes":"'"$notes"'"'
 		websiteField='"website":"'"$website"'"'
-		jsonRequestBody='{'"$restaurantIdField"','"$nameField"','"$locationField"','"$tagsField"','"$priceField"','"$mealsField"','"$menuField"','"$addressField"','"$phoneNumberField"','"$reviewsField"','"$foodTypesField"','"$notesField"','"$websiteField"'}'
+		jsonRequestBody='{'"$restaurantIdField"','"$imgPathField"','"$nameField"','"$locationField"','"$tagsField"','"$priceField"','"$mealsField"','"$menuField"','"$addressField"','"$phoneNumberField"','"$reviewsField"','"$foodTypesField"','"$notesField"','"$websiteField"'}'
 		echo $jsonRequestBody
 		curl -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -d "$jsonRequestBody" "http://localhost:3000/addRestaurant"
 		idx=$((idx+1))
