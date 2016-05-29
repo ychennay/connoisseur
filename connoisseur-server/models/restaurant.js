@@ -109,7 +109,17 @@ var restaurantSchema = new Schema({
         happy_hour: {type: Boolean, default: false},
         lunch: {type: Boolean, default: false}
     }],
-    menu: String,
+    menu: [{
+        meal: String,
+        categories: [{
+            category_name: String,
+            dishes: [{
+                dish_name: String,
+                description: String,
+                price: Number
+            }]
+        }]
+    }],
     phone_number: String,
     reviews: String,
     food_types: [{
