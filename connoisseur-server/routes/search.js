@@ -304,10 +304,27 @@ router.get('/', passport.authenticate('jwt', {session:false}), function(req, res
 		    									//with regularly searched restaurants
 		    									var numRestaurantsNeeded = 5 - topListRestaurants.length;
 
+                                                //get the restaurants already being returned
+                                                var alreadyReturnedIds = [];
+                                                for(var p = 0; p < topListRestaurants.length; p++){
+                                                    alreadyReturnedIds.push(topListRestaurants[p].restaurantId);
+                                                }
+
 		    									Restaurant.find({
 													// Retrieve the list of all restaurants matching the queried restaurant
 													// id and name.
-													name : new RegExp('^.*' + queriedName + '.*$', "i")
+                                                    // Also don't return duplicates
+                                                    $and: [
+                                                        {
+                                                            name : new RegExp('^.*' + queriedName + '.*$', "i")
+                                                        },
+                                                        {
+                                                            restaurantId: {
+                                                                $nin: alreadyReturnedIds
+                                                            }
+                                                        }
+                                                    ]
+													
 												}, function (err, restaurants) {
 													// Filter the restaurants to only those matching the queried tags, food
 													// types, and meals.
