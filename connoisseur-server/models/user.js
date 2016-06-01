@@ -14,6 +14,15 @@ var userSchema = new Schema({
     email: String,
     firstName: String,
     lastName: String,
+    age: String,
+    gender: {
+        type: String,
+        enum: ['male', 'female']
+    },
+    dietary_preference: {
+        type: String,
+        enum: ['vegetarian', 'vegan', 'gluten_free', 'organic']
+    },
     location: [{ 
         latitude: Number,
         longitude: Number
