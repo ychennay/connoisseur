@@ -9,13 +9,13 @@ router.get('/', passport.authenticate('jwt', { session: false }), function(req, 
 
     var username = req.user.username;
 
-    Bookmark.find({
+    User.find({
         username: username
-    }, function (err, bookmarks) {
+    }, function (err, user) {
         if (err) {
             res.send({success: false, message: err});
-        } else if (bookmarks.length) {
-            res.send({success: true, message: bookmarks });
+        } else if (user.length) {
+            res.send({success: true, message: user});
         }
     });
 

@@ -86,7 +86,7 @@ $ (Make your changes)
 $ ssh -i mongo.pem mms-user@con-db-0.connoisseur.3043.mongodbdns.com
 $ screen (creates a terminal session that won't close when ssh closes)
 $ mongod --dbpath data
-
+rs
 $ ssh -i connoisseurKeyPair.pem ec2-user@ec2-54-187-107-93.us-west-2.compute.amazonaws.com
 $ screen (creates a terminal session that won't close when ssh closes)
 $ nodemon start

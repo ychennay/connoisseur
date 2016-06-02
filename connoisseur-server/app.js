@@ -22,6 +22,8 @@ var addBookmark = require('./routes/addBookmark');
 var removeBookmark = require('./routes/removeBookmark');
 var getBookmarks = require('./routes/getBookmarks');
 var addUser = require('./routes/addUser');
+var updateUser = require('./routes/updateUser');
+var getUser = require('./routes/getUser');
 var auth = require('./routes/auth');
 
 // view engine setup
@@ -70,6 +72,8 @@ app.use('/addBookmark', addBookmark);
 app.use('/removeBookmark', removeBookmark);
 app.use('/getBookmarks', getBookmarks);
 app.use('/addUser', addUser);
+app.use('/getUser', getUser);
+app.use('/updateUser', updateUser);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -11,6 +11,9 @@ router.post('/', function(req, res, next) {
     username: req.body.username,
     password: req.body.password,
     location: req.body.location,
+    //age: undefined,
+    //gender: undefined,
+    //dietary_preference: undefined,
     created_at: Date.now(),
     updated_at: Date.now()
   }).save( function(err) {
