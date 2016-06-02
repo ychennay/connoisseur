@@ -16,6 +16,8 @@ router.get('/', passport.authenticate('jwt', { session: false }), function(req, 
             res.send({success: false, message: err});
         } else if (bookmarks.length) {
             res.send({success: true, message: bookmarks });
+        } else {
+            res.send({success: false, message: 'No bookmarks found for this user'});
         }
     });
 
