@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# takes in
 listToBoolMap () {
 	map=''
 	for item in $1
