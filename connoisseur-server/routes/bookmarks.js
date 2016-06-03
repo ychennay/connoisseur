@@ -4,8 +4,8 @@ var Bookmark = require('../models/bookmark');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  Bookmark.find({}, function (err, ratings) {
-    res.send(ratings);
+  Bookmark.find({}, function (err, bookmarks) {
+    res.send(bookmarks);
   });
 });
 
