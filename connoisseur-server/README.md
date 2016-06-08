@@ -47,35 +47,35 @@ $ mongo
 
 # How to run (via AWS):
 ```
-$ ssh -i mongo.pem mms-user@con-db-0.connoisseur.3043.mongodbdns.com
+$ ssh -i mongo.pem mms-user@con-0.connoisseurteam.2753.mongodbdns.com
 $ cd connoisseur/connoisseur-server
 $ sudo mongod --dbpath data/
 In another tab...
-$ ssh -i connoisseurKeyPair.pem ec2-user@ec2-54-187-107-93.us-west-2.compute.amazonaws.com
+$ ssh -i connoisseurKeyPair.pem ec2-user@ec2-52-11-254-37.us-west-2.compute.amazonaws.com
 $ cd connoisseur/connoisseur-server
 $ npm start
 
 Check out routes by 
-$ chrome ec2-54-187-107-93.us-west-2.compute.amazonaws.com:3000/<routename>
+$ chrome ec2-52-11-254-37.us-west-2.compute.amazonaws.com:3000/<routename>
 ```
 
 # Update application on servers:
 ```
-$ ssh -i mongo.pem mms-user@con-db-0.connoisseur.3043.mongodbdns.com
+$ ssh -i mongo.pem mms-user@con-0.connoisseurteam.2753.mongodbdns.com
 $ cd connoisseur
 $ git pull
-$ ssh -i connoisseurKeyPair.pem ec2-user@ec2-54-187-107-93.us-west-2.compute.amazonaws.com
+$ ssh -i connoisseurKeyPair.pem ec2-user@ec2-52-11-254-37.us-west-2.compute.amazonaws.com
 $ cd connoisseur
 $ git pull
 ```
 
 # Shut down server/database
 ```
-$ ssh -i mongo.pem mms-user@con-db-0.connoisseur.3043.mongodbdns.com
+$ ssh -i mongo.pem mms-user@con-0.connoisseurteam.2753.mongodbdns.com
 $ screen -R (this reconnects to the existing terminal session where the db is running)
 $ (Make your changes)
 
-$ ssh -i connoisseurKeyPair.pem ec2-user@ec2-54-187-107-93.us-west-2.compute.amazonaws.com
+$ ssh -i connoisseurKeyPair.pem ec2-user@ec2-52-11-254-37.us-west-2.compute.amazonaws.com
 $ screen -R (this reconnects to the existing terminal session where the app is running)
 $ (Make your changes)
 ```
@@ -83,11 +83,11 @@ $ (Make your changes)
 
 # Start server/database
 ```
-$ ssh -i mongo.pem mms-user@con-db-0.connoisseur.3043.mongodbdns.com
+$ ssh -i mongo.pem mms-user@con-0.connoisseurteam.2753.mongodbdns.com
 $ screen (creates a terminal session that won't close when ssh closes)
 $ mongod --dbpath data
 rs
-$ ssh -i connoisseurKeyPair.pem ec2-user@ec2-54-187-107-93.us-west-2.compute.amazonaws.com
+$ ssh -i connoisseurKeyPair.pem ec2-user@ec2-52-11-254-37.us-west-2.compute.amazonaws.com
 $ screen (creates a terminal session that won't close when ssh closes)
 $ nodemon start
 ```
