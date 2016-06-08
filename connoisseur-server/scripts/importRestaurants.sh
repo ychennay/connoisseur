@@ -329,7 +329,7 @@ then
 		websiteField='"website":"'"$website"'"'
 		jsonRequestBody='{'"$restaurantIdField"','"$imgPathField"','"$nameField"','"$locationField"','"$tagsField"','"$priceField"','"$mealsField"','"$menuField"','"$addressField"','"$phoneNumberField"','"$reviewsField"','"$foodTypesField"','"$notesField"','"$websiteField"'}'
 		echo $jsonRequestBody
-		curl -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -d "$jsonRequestBody" "http://localhost:3000/addRestaurant"
+		curl -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -d "$jsonRequestBody" "http://52.11.254.37:3000/addRestaurant"
 		idx=$((idx+1))
 	done <$1
 else

@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
-mongoose.connect('localhost', 'gettingstarted');
+mongoose.connect('mongodb://con-0.connoisseurteam.2753.mongodbdns.com');
 
 var app = express();
 
