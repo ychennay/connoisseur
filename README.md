@@ -1,5 +1,6 @@
 # Connoisseur
 CS 130 Project
+(forked from previous year's repository)
 
 # Members
 Yu Chen<br />
